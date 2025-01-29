@@ -10,10 +10,11 @@ export default function ImageGenerator() {
   const handleSubmit = async (
     username: string,
     style: string,
+    size: string,
     tags: string[]
   ) => {
     const repsonse = await submitForm(
-      JSON.stringify({ username, style, tags })
+      JSON.stringify({ username, style, size, tags })
     );
     console.log(repsonse);
     if (repsonse.status === "error") {

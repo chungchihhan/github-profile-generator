@@ -4,10 +4,12 @@ import { z } from "zod";
 const formSchema = z.object({
   username: z.string().min(1, "Username is required"),
   style: z.string().min(1, "Style is required"),
+  size: z.string().min(1, "Size is required"),
   tags: z.array(z.string()),
 });
 
 export async function submitForm(data: string) {
+  console.log("Received data:", data);
   const parsedData = JSON.parse(data);
   const validation = formSchema.safeParse(parsedData);
 
@@ -25,8 +27,7 @@ export async function submitForm(data: string) {
   try {
     console.log("Validated data:", validation.data);
 
-    // Extract username from validated data
-    const { username, style, tags } = validation.data;
+    const { username, style, size, tags } = validation.data;
 
     // Fetch GitHub repos
     const githubUrl = new URL(`https://api.github.com/users/${username}/repos`);
@@ -62,8 +63,8 @@ export async function submitForm(data: string) {
     }
 
     const prompt = `
-    Generate an image representing GitHub user "${username}" in a "${style}" style. 
-    Highlight themes: ${tags.join(", ")}.
+    Generate an image representing GitHub user: "${username}" in a "${style}" style. 
+    Embellished items: ${tags.join(", ")}.
     Capture the essence of their repositories:
     ${repoDetails.join("\n")}
     `;
@@ -82,7 +83,7 @@ export async function submitForm(data: string) {
           model: "dall-e-3",
           prompt,
           n: 1,
-          size: "1024x1024",
+          size: size,
         }),
       }
     );

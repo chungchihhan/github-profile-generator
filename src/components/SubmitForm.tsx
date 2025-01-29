@@ -2,27 +2,42 @@ import { useState } from "react";
 import Tag from "@/components/Tag";
 
 interface FormProps {
-  onSubmit: (url: string, style: string, tags: string[]) => void;
+  onSubmit: (url: string, style: string, size: string, tags: string[]) => void;
 }
 
-const styles = ["Realistic", "Cartoon", "Abstract", "Minimalist"];
+const styles = [
+  "Pixel Art",
+  "Cartoon",
+  "3D",
+  "Cyberpunk",
+  "Manga",
+  "Street Art",
+];
+
+const sizes = ["1024x1024", "1792x1024", "1024x1792"];
+
 const availableTags = [
-  "Nature",
-  "Urban",
+  "Cats",
+  "Dogs",
+  "Animals",
+  "Bedroom",
+  "Office",
   "People",
   "Technology",
+  "Nature",
+  "Urban",
   "Food",
-  "Animals",
 ];
 
 export default function SubmitForm({ onSubmit }: FormProps) {
   const [username, setUsername] = useState("");
   const [style, setStyle] = useState(styles[0]);
+  const [size, setSize] = useState(sizes[0]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(username, style, selectedTags);
+    onSubmit(username, style, size, selectedTags);
   };
 
   const toggleTag = (tag: string) => {
@@ -63,9 +78,29 @@ export default function SubmitForm({ onSubmit }: FormProps) {
           onChange={(e) => setStyle(e.target.value)}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         >
-          {styles.map((s) => (
-            <option key={s} value={s}>
-              {s}
+          {styles.map((style) => (
+            <option key={style} value={style}>
+              {style}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label
+          htmlFor="size"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Size
+        </label>
+        <select
+          id="size"
+          value={size}
+          onChange={(e) => setSize(e.target.value)}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        >
+          {sizes.map((size) => (
+            <option key={size} value={size}>
+              {size}
             </option>
           ))}
         </select>
