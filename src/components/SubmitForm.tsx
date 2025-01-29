@@ -16,13 +16,13 @@ const availableTags = [
 ];
 
 export default function SubmitForm({ onSubmit }: FormProps) {
-  const [url, setUrl] = useState("");
+  const [username, setUsername] = useState("");
   const [style, setStyle] = useState(styles[0]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(url, style, selectedTags);
+    onSubmit(username, style, selectedTags);
   };
 
   const toggleTag = (tag: string) => {
@@ -35,19 +35,19 @@ export default function SubmitForm({ onSubmit }: FormProps) {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label
-          htmlFor="url"
+          htmlFor="username"
           className="block text-sm font-medium text-gray-700"
         >
-          Image URL
+          github username
         </label>
         <input
-          type="url"
-          id="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
+          type="username"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          placeholder="https://example.com/image.jpg"
+          placeholder="chungchihhan"
         />
       </div>
       <div>
