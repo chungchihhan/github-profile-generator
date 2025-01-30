@@ -21,30 +21,22 @@ export default function ImageGenerator() {
       alert(repsonse.message);
       return;
     } else {
-      setImageUrl(repsonse.imageUrl);
+      if (repsonse.imageUrl) {
+        setImageUrl(repsonse.imageUrl);
+      } else {
+        setImageUrl(null);
+      }
     }
   };
 
   return (
-    <div
-      className={`container mx-auto px-4 ${
-        imageUrl ? "mt-8" : "flex h-screen items-center justify-center"
-      }`}
-    >
-      <div
-        className={`bg-white rounded-lg shadow-md p-6 ${
-          imageUrl ? "mb-8" : ""
-        }`}
-      >
+    <div className="">
+      <div className="p-4">
         <SubmitForm onSubmit={handleSubmit} />
       </div>
       {imageUrl && (
-        <div className="mt-8">
-          <img
-            src={imageUrl}
-            alt="Generated image"
-            className="mx-auto rounded-lg shadow-md"
-          />
+        <div className="">
+          <img src={imageUrl} alt="Generated image" className="" />
         </div>
       )}
     </div>

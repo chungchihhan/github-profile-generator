@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Tag from "@/components/Tag";
+import { Github } from "lucide-react";
+import CustomDropdown from "@/components/CustomDropdown";
 
 interface FormProps {
   onSubmit: (url: string, style: string, size: string, tags: string[]) => void;
@@ -47,66 +49,56 @@ export default function SubmitForm({ onSubmit }: FormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="bg-white rounded p-8 space-y-8">
       <div>
         <label
           htmlFor="username"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-md font-bold text-neutral-700 py-2"
         >
-          github username
+          GitHub Username
         </label>
-        <input
-          type="username"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          placeholder="chungchihhan"
-        />
+        <div className="relative">
+          <Github
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            size={18}
+          />
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            className="pl-10 pr-4 py-2 block w-full rounded-md border-2 border-neutral-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            placeholder="chungchihhan"
+          />
+        </div>
+      </div>
+      <div className="flex justify-between gap-2">
+        <div className="w-full">
+          <label
+            htmlFor="style"
+            className="block text-md font-bold text-neutral-700 py-2"
+          >
+            Style
+          </label>
+          <CustomDropdown
+            options={styles}
+            selected={style}
+            onChange={setStyle}
+          />
+        </div>
+        <div className="w-full">
+          <label
+            htmlFor="size"
+            className="block text-md font-bold text-neutral-700 py-2"
+          >
+            Size
+          </label>
+          <CustomDropdown options={sizes} selected={size} onChange={setSize} />
+        </div>
       </div>
       <div>
-        <label
-          htmlFor="style"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Style
-        </label>
-        <select
-          id="style"
-          value={style}
-          onChange={(e) => setStyle(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        >
-          {styles.map((style) => (
-            <option key={style} value={style}>
-              {style}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label
-          htmlFor="size"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Size
-        </label>
-        <select
-          id="size"
-          value={size}
-          onChange={(e) => setSize(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        >
-          {sizes.map((size) => (
-            <option key={size} value={size}>
-              {size}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <span className="block text-sm font-medium text-gray-700 mb-2">
+        <span className="block text-md font-bold text-neutral-700 py-2">
           Tags
         </span>
         <div className="flex flex-wrap gap-2">
