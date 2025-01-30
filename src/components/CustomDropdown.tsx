@@ -27,21 +27,19 @@ export default function CustomDropdown({
         className="flex items-center gap-2 border-2 border-neutral-300 rounded-md p-2 cursor-pointer shadow-sm bg-white focus-within:border-indigo-300"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {/* Custom Left Icon */}
         <ChevronDown className="text-neutral-500 w-5 h-5" />
 
-        {/* Selected Value */}
         <span className="flex-1 text-gray-800">{selected}</span>
       </div>
 
       {/* Dropdown List */}
       {isOpen && (
-        <div className="absolute z-10 mt-2 w-full bg-white border border-neutral-300 rounded-md shadow-md overflow-hidden">
+        <div className="absolute z-10 mt-2 w-full bg-white border-2 border-neutral-300 rounded-md shadow-md overflow-hidden">
           {options.map((option) => (
             <div
               key={option}
-              className={`p-2 cursor-pointer hover:bg-indigo-100 text-gray-800 ${
-                selected === option ? "bg-indigo-200" : ""
+              className={`p-2 cursor-pointer hover:bg-neutral-100 text-gray-800 ${
+                selected === option ? "bg-neutral-200" : ""
               }`}
               onClick={() => handleSelect(option)}
             >

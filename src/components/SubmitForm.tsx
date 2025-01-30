@@ -49,7 +49,7 @@ export default function SubmitForm({ onSubmit }: FormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded p-8 space-y-8">
+    <form onSubmit={handleSubmit} className="bg-white rounded-lg p-8 space-y-8">
       <div>
         <label
           htmlFor="username"
@@ -114,7 +114,7 @@ export default function SubmitForm({ onSubmit }: FormProps) {
       </div>
       <button
         type="submit"
-        className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+        className="w-full bg-neutral-500 text-white py-2 px-4 rounded-md hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
       >
         Generate Image
       </button>
