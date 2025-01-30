@@ -3,9 +3,9 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex flex-grow gap-4 px-4 font-mono">
-      <div className=" w-full rounded-lg flex flex-col items-center justify-center">
-        <div className="flex flex-col px-20 gap-4 text-white">
+    <main className="flex flex-grow flex-col lg:flex-row gap-4 px-4 font-mono">
+      <div className="w-full rounded-lg flex items-center justify-center">
+        <div className="flex flex-col px-4 py-10 lg:py-0 lg:px-20 gap-4 text-white">
           <h1 className="text-4xl font-semibold">Welcome to GitVatar!</h1>
           <p>
             GitVatar is a{" "}
