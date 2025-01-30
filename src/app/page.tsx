@@ -3,18 +3,20 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex flex-grow flex-col lg:flex-row gap-4 px-4 font-mono">
+    <main className="flex flex-grow flex-col lg:flex-row gap-4 px-4 font-mono max-w-full">
       <div className="w-full rounded-lg flex items-center justify-center">
         <div className="flex flex-col px-4 py-10 lg:py-0 lg:px-20 gap-4 text-white">
-          <h1 className="text-4xl font-semibold">Welcome to GitVatar!</h1>
-          <p>
+          <h1 className="text-2xl lg:text-4xl font-semibold">
+            Welcome to GitVatar!
+          </h1>
+          <p className="text-lg lg:text-xl break-words">
             GitVatar is a{" "}
             <strong className="italic">Github profile generator</strong> that
             reads your github reposioties and generates a unique image for you.
           </p>
           <Link
             className="bg-white text-green-500 px-4 py-2 text-nowrap inline-flex items-center justify-center h-12 rounded-md font-semibold"
-            href="/generate"
+            href="/contact"
           >
             Get Started
             <ArrowRight size={18} strokeWidth={3} className="ml-2" />

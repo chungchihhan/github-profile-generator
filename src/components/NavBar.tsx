@@ -35,7 +35,7 @@ export default function NavBar() {
 
         {/* Mobile Menu Dropdown */}
         {isOpen && (
-          <div className="md:hidden space-y-2 py-4 text-white">
+          <div className="md:hidden space-y-2 py-2 text-white">
             <NavLink href="/" onClick={() => setIsOpen(false)}>
               Home
             </NavLink>
@@ -67,7 +67,7 @@ const NavLink = ({
 }) => (
   <Link
     href={href}
-    className="block px-4 py-2 text-white hover:text-gray-300 transition"
+    className="block p-2 text-white hover:text-gray-300 hover:underline transition"
     onClick={onClick}
   >
     {children}
