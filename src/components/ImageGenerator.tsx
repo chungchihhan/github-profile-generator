@@ -31,7 +31,7 @@ export default function ImageGenerator() {
 
   return (
     <div className="">
-      <div className="p-4">
+      <div className="px-4">
         <SubmitForm onSubmit={handleSubmit} />
       </div>
       {imageUrl && (

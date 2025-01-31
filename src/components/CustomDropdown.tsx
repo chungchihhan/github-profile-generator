@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 
 interface CustomDropdownProps {
@@ -14,6 +14,21 @@ export default function CustomDropdown({
   onChange,
 }: CustomDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSelect = (value: string) => {
     onChange(value);
@@ -21,25 +36,24 @@ export default function CustomDropdown({
   };
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full z-50 overflow-visible" ref={dropdownRef}>
       {/* Dropdown Button */}
       <div
-        className="flex items-center gap-2 border-2 border-neutral-300 rounded-md p-2 cursor-pointer shadow-sm bg-white focus-within:border-indigo-300"
-        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 rounded-md p-2 cursor-pointer shadow-sm bg-white/10 text-white"
+        onClick={() => setIsOpen((prev) => !prev)}
       >
-        <ChevronDown className="text-neutral-500 w-5 h-5" />
-
-        <span className="flex-1 text-gray-800">{selected}</span>
+        <ChevronDown className="text-white w-5 h-5" />
+        <span className="flex-1 text-white mr-2">{selected}</span>
       </div>
 
       {/* Dropdown List */}
       {isOpen && (
-        <div className="absolute z-10 mt-2 w-full bg-white border-2 border-neutral-300 rounded-md shadow-md overflow-hidden">
+        <div className="absolute left-0 top-full mt-1 w-full bg-white/10 rounded-md shadow-md z-[9999]">
           {options.map((option) => (
             <div
               key={option}
-              className={`p-2 cursor-pointer hover:bg-neutral-100 text-gray-800 ${
-                selected === option ? "bg-neutral-200" : ""
+              className={`p-2 cursor-pointer hover:bg-white/15 hover:rounded-md text-white ${
+                selected === option ? "bg-white/10 rounded-md" : ""
               }`}
               onClick={() => handleSelect(option)}
             >

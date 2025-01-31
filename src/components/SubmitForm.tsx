@@ -2,6 +2,7 @@ import { useState } from "react";
 import Tag from "@/components/Tag";
 import { Github } from "lucide-react";
 import CustomDropdown from "@/components/CustomDropdown";
+import { FastForward } from "lucide-react";
 
 interface FormProps {
   onSubmit: (url: string, style: string, size: string, tags: string[]) => void;
@@ -15,9 +16,7 @@ const styles = [
   "Manga",
   "Street Art",
 ];
-
 const sizes = ["1024x1024", "1792x1024", "1024x1792"];
-
 const availableTags = [
   "Cats",
   "Dogs",
@@ -49,35 +48,37 @@ export default function SubmitForm({ onSubmit }: FormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg p-8 space-y-8">
-      <div>
-        <label
-          htmlFor="username"
-          className="block text-md font-bold text-neutral-700 py-2"
-        >
-          GitHub Username
-        </label>
-        <div className="relative">
-          <Github
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-            size={18}
-          />
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            className="pl-10 pr-4 py-2 block w-full rounded-md border-2 border-neutral-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            placeholder="chungchihhan"
-          />
+    <form onSubmit={handleSubmit} className="flex justify-between px-4">
+      <div className="flex items-start gap-x-4">
+        {/* GitHub Username Input */}
+        <div className="">
+          <div>
+            <label
+              htmlFor="username"
+              className="block text-sm font-bold text-white py-2"
+            >
+              GitHub Username
+            </label>
+            <div className="relative flex items-center">
+              <Github className="absolute left-3 text-white" size={18} />
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                className="bg-white/10 pl-10 pr-4 py-2 block w-48 rounded-md shadow-sm focus:outline-none focus:bg-white/15 focus:ring-0 placeholder-white/30 text-white"
+                placeholder="chungchihhan"
+              />
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="flex justify-between gap-2">
-        <div className="w-full">
+
+        {/* Style Dropdown */}
+        <div className="">
           <label
             htmlFor="style"
-            className="block text-md font-bold text-neutral-700 py-2"
+            className="block text-sm font-bold text-white py-2"
           >
             Style
           </label>
@@ -87,37 +88,49 @@ export default function SubmitForm({ onSubmit }: FormProps) {
             onChange={setStyle}
           />
         </div>
-        <div className="w-full">
+
+        {/* Size Dropdown */}
+        <div>
           <label
             htmlFor="size"
-            className="block text-md font-bold text-neutral-700 py-2"
+            className="block text-sm font-bold text-white py-2"
           >
             Size
           </label>
           <CustomDropdown options={sizes} selected={size} onChange={setSize} />
         </div>
-      </div>
-      <div>
-        <span className="block text-md font-bold text-neutral-700 py-2">
-          Tags
-        </span>
-        <div className="flex flex-wrap gap-2">
-          {availableTags.map((tag) => (
-            <Tag
-              key={tag}
-              name={tag}
-              selected={selectedTags.includes(tag)}
-              onClick={() => toggleTag(tag)}
-            />
-          ))}
+
+        {/* Tags Section */}
+        <div className="">
+          <label
+            htmlFor="tags"
+            className="block text-sm font-bold text-white py-2"
+          >
+            Tags
+          </label>
+          <div className="flex gap-2 py-2">
+            {availableTags.map((tag) => (
+              <Tag
+                key={tag}
+                name={tag}
+                selected={selectedTags.includes(tag)}
+                onClick={() => toggleTag(tag)}
+              />
+            ))}
+          </div>
         </div>
       </div>
-      <button
-        type="submit"
-        className="w-full bg-neutral-500 text-white py-2 px-4 rounded-md hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
-      >
-        Generate Image
-      </button>
+
+      {/* Submit Button */}
+      <div className="flex items-center">
+        <button
+          type="submit"
+          className="flex justify-center items-center gap-2 rounded-full bg-transparent text-white p-4 hover:bg-white/10 focus:outline-none focus:bg-white/30"
+        >
+          Generate
+          <FastForward size={18} color="white" />
+        </button>
+      </div>
     </form>
   );
 }
