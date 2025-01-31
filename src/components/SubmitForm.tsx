@@ -48,34 +48,36 @@ export default function SubmitForm({ onSubmit }: FormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex justify-between px-4">
-      <div className="flex items-start gap-x-4">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col lg:flex-row justify-between px-4 w-full gap-6"
+    >
+      {/* Input Fields Container */}
+      <div className="flex flex-col lg:flex-row lg:items-start w-full gap-4">
         {/* GitHub Username Input */}
-        <div className="">
-          <div>
-            <label
-              htmlFor="username"
-              className="block text-sm font-bold text-white py-2"
-            >
-              GitHub Username
-            </label>
-            <div className="relative flex items-center">
-              <Github className="absolute left-3 text-white" size={18} />
-              <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                className="bg-white/10 pl-10 pr-4 py-2 block w-48 rounded-md shadow-sm focus:outline-none focus:bg-white/15 focus:ring-0 placeholder-white/30 text-white"
-                placeholder="chungchihhan"
-              />
-            </div>
+        <div className="flex flex-col w-full lg:max-w-96">
+          <label
+            htmlFor="username"
+            className="block text-sm font-bold text-white py-2"
+          >
+            GitHub Username
+          </label>
+          <div className="relative flex items-center">
+            <Github className="absolute left-3 text-white" size={18} />
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              className="bg-white/10 pl-10 pr-4 py-2 w-full rounded-md shadow-sm focus:outline-none focus:bg-white/15 focus:ring-0 placeholder-white/30 text-white"
+              placeholder="chungchihhan"
+            />
           </div>
         </div>
 
         {/* Style Dropdown */}
-        <div className="">
+        <div className="flex flex-col w-full lg:max-w-40">
           <label
             htmlFor="style"
             className="block text-sm font-bold text-white py-2"
@@ -90,7 +92,7 @@ export default function SubmitForm({ onSubmit }: FormProps) {
         </div>
 
         {/* Size Dropdown */}
-        <div>
+        <div className="flex flex-col w-full lg:max-w-40">
           <label
             htmlFor="size"
             className="block text-sm font-bold text-white py-2"
@@ -101,14 +103,14 @@ export default function SubmitForm({ onSubmit }: FormProps) {
         </div>
 
         {/* Tags Section */}
-        <div className="">
+        <div className="flex flex-col w-full lg:max">
           <label
             htmlFor="tags"
             className="block text-sm font-bold text-white py-2"
           >
             Tags
           </label>
-          <div className="flex gap-2 py-2">
+          <div className="flex flex-wrap gap-2">
             {availableTags.map((tag) => (
               <Tag
                 key={tag}
@@ -122,10 +124,10 @@ export default function SubmitForm({ onSubmit }: FormProps) {
       </div>
 
       {/* Submit Button */}
-      <div className="flex items-center">
+      <div className="flex justify-center lg:justify-end w-full lg:w-auto">
         <button
           type="submit"
-          className="flex justify-center items-center gap-2 rounded-full bg-transparent text-white p-4 hover:bg-white/10 focus:outline-none focus:bg-white/30"
+          className="flex justify-center items-center gap-2 rounded-full bg-transparent text-white px-6 py-3 hover:bg-white/10 focus:outline-none focus:bg-white/30 italic text-lg animate-pulse"
         >
           Generate
           <FastForward size={18} color="white" />
