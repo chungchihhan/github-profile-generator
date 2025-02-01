@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react"; // Icons for mobile menu
+import { Menu, User, X } from "lucide-react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <nav className="p-4">
@@ -17,20 +19,48 @@ export default function NavBar() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6">
+          <div className="hidden md:flex space-x-6 h-10">
             <NavLink href="/">Home</NavLink>
             <NavLink href="/about">About</NavLink>
             <NavLink href="/generate">Generate</NavLink>
             <NavLink href="/contact">Contact</NavLink>
+            <Link href="/login" className="flex items-center">
+              <div className="flex overflow-hidden rounded-full border-2 border-white">
+                {session ? (
+                  <img
+                    src={session.user?.image || "/default-avatar.png"}
+                    alt="User Avatar"
+                    className="w-7"
+                  />
+                ) : (
+                  <User className="text-white" />
+                )}
+              </div>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden focus:outline-none text-white py-2"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="md:hidden flex gap-6">
+            <button
+              className="focus:outline-none text-white py-2"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+            <Link href="/login" className="flex items-center">
+              <div className="flex overflow-hidden rounded-full border-2 border-white">
+                {session ? (
+                  <img
+                    src={session.user?.image || "/default-avatar.png"}
+                    alt="User Avatar"
+                    className="w-7"
+                  />
+                ) : (
+                  <User className="text-white" />
+                )}
+              </div>
+            </Link>
+          </div>
         </div>
 
         {/* Mobile Menu Dropdown */}
