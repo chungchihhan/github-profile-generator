@@ -10,7 +10,7 @@ export default function NavBar() {
   return (
     <nav className="p-4">
       <div className="mx-auto p-4 rounded-lg px-8 bg-white/10 backdrop-blur-lg shadow-2xl">
-        <div className="flex justify-between items-center text-white">
+        <div className="flex justify-between items-center text-white font-mono">
           {/* Logo / Brand */}
           <Link href="/" className="text-2xl font-bold text-white">
             GitVatar

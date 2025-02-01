@@ -14,7 +14,7 @@ export default function RootLayout({
         <div className="flex flex-col min-h-screen bg-gradient-to-bl from-black to-green-400">
           <NavBar />
           <SessionProvider>
-            <div className="flex flex-grow pb-4">{children}</div>
+            <div className="flex flex-grow px-4">{children}</div>
           </SessionProvider>
         </div>
       </body>
