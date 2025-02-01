@@ -11,20 +11,22 @@ export default function Page() {
         <div className="text-center mb-40">
           {session ? (
             <>
-              <img
-                src={session.user?.image || "/default-avatar.png"}
-                alt="User Avatar"
-                className="w-20 h-20 rounded-full mx-auto mb-3"
-              />
-              <p className="text-lg font-semibold text-gray-800">
-                Welcome, {session.user?.name}!
-              </p>
-              <button
-                onClick={() => signOut()}
-                className="mt-4 w-full bg-red-500 text-white font-semibold py-2 rounded-lg hover:bg-red-600 transition"
-              >
-                Sign Out
-              </button>
+              <div className="flex flex-col gap-4 font-mono items-center">
+                <img
+                  src={session.user?.image || "/default-avatar.png"}
+                  alt="User Avatar"
+                  className="w-56 h-56 rounded-full"
+                />
+                <p className="text-lg text-white">
+                  Welcome, <strong>{session.user?.name}!</strong>
+                </p>
+                <button
+                  onClick={() => signOut()}
+                  className="bg-green-900 shadow-lg text-white font-semibold px-8 py-2 rounded-lg hover:bg-green-800 transition"
+                >
+                  Sign Out
+                </button>
+              </div>
             </>
           ) : (
             <>
@@ -35,7 +37,7 @@ export default function Page() {
                 </p> */}
                 <button
                   onClick={() => signIn("github")}
-                  className="gap-2 bg-white/30 font-mono text-lg text-white font-semibold px-8 py-2 rounded-lg hover:bg-gray-700 transition flex items-center justify-center"
+                  className="gap-2 bg-white/30 font-mono text-lg text-white font-semibold px-8 py-2 rounded-lg hover:bg-white/20 focus:bg-white/10 shadow-md hover:shadow-lg flex items-center justify-center"
                 >
                   <Github size={18} className="" />
                   Sign in with GitHub
