@@ -36,11 +36,14 @@ export default function HomePage() {
     const fetchRepos = async () => {
       if (!session?.accessToken) return;
       try {
-        const res = await fetch("https://api.github.com/user/repos", {
-          headers: {
-            Authorization: `Bearer ${session.accessToken}`,
-          },
-        });
+        const res = await fetch(
+          "https://api.github.com/user/repos?sort=created&direction=desc",
+          {
+            headers: {
+              Authorization: `Bearer ${session.accessToken}`,
+            },
+          }
+        );
         if (!res.ok) {
           throw new Error("Error fetching repos");
         }
