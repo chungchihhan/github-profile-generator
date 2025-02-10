@@ -9,6 +9,7 @@ interface Repo {
   html_url: string;
   description: string;
   language: string;
+  visibility: string;
 }
 
 declare module "next-auth" {
@@ -81,7 +82,9 @@ export default function HomePage() {
           {repos.map((repo) => (
             <li
               key={repo.id}
-              className="flex flex-col font-mono justify-between bg-white/10 p-4 rounded-lg shadow-lg"
+              className={`flex flex-col gap-6 font-mono justify-between ${
+                repo.visibility === "private" ? "bg-white/5" : "bg-white/20"
+              } p-4 rounded-lg shadow-lg`}
             >
               <div>
                 <a
@@ -94,11 +97,18 @@ export default function HomePage() {
                   {repo.description || "No description provided."}
                 </p>
               </div>
-              <p className="text-sm text-white w-full flex">
-                <strong className="w-full text-end">
-                  {repo.language || "N/A"}
-                </strong>
-              </p>
+              <div className="text-xs text-white w-full flex justify-between items-center">
+                <p
+                  className={`px-3 py-1 ${
+                    repo.visibility === "private"
+                      ? "bg-white/15"
+                      : "bg-white/30"
+                  } rounded-full uppercase shadow-lg `}
+                >
+                  {repo.visibility}
+                </p>
+                <p>{repo.language || "N/A"}</p>
+              </div>
             </li>
           ))}
         </ul>
