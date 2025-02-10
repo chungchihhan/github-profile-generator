@@ -28,6 +28,14 @@ export default function Page() {
     );
   }
 
+  if (!session) {
+    return (
+      <div>
+        <p>Your session has expired. Please log in again.</p>
+      </div>
+    );
+  }
+
   return (
     <main className="min-h-screen w-full">
       <ImageGenerator />

@@ -13,6 +13,10 @@ export const authOptions = {
       },
     }),
   ],
+  session: {
+    stragety: "jwt",
+    maxAge: 24 * 60 * 60,
+  },
   callbacks: {
     async jwt({ token, account }: { token: any; account: any }) {
       if (account?.access_token) {
@@ -23,6 +27,9 @@ export const authOptions = {
     async session({ session, token }: { session: any; token: any }) {
       if (token?.accessToken) {
         session.accessToken = token.accessToken as string;
+      }
+      if (!session.accessToken) {
+        session.error = "Session expired, please log in again";
       }
       return session;
     },
