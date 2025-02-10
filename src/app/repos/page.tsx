@@ -1,6 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Repo {
   id: number;
@@ -18,6 +19,16 @@ declare module "next-auth" {
 export default function HomePage() {
   const { data: session, status } = useSession();
   const [repos, setRepos] = useState<Repo[]>([]);
+  const router = useRouter();
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    } else if (status !== "loading") {
+      setCheckingAuth(false);
+    }
+  }, [status, router]);
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -41,10 +52,19 @@ export default function HomePage() {
     fetchRepos();
   }, [session]);
 
-  if (status === "loading") {
+  if (checkingAuth) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 text-gray-600">
-        <p className="text-lg">Loading session...</p>
+      <main className="min-h-screen w-full flex items-center justify-center">
+        <p className="text-xl text-white font-mono">
+          Checking authentication...
+        </p>
+      </main>
+    );
+  }
+  if (!session) {
+    return (
+      <div>
+        <p>Your session has expired. Please log in again.</p>
       </div>
     );
   }
