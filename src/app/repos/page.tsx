@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 interface Repo {
   id: number;
   name: string;
+  html_url: string;
   description: string;
   language: string;
 }
@@ -42,6 +43,7 @@ export default function HomePage() {
         if (!res.ok) {
           throw new Error("Error fetching repos");
         }
+        console.log(res);
         const data: Repo[] = await res.json();
         setRepos(data);
       } catch (error) {
@@ -70,25 +72,32 @@ export default function HomePage() {
   }
 
   return (
-    <div className="w-full py-8 px-4">
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-6 text-gray-800">
+    <div className="w-full px-4 pb-12">
+      <div className="">
+        <h1 className="block text-sm font-bold text-white py-2">
           Your GitHub Repos
         </h1>
-        <ul className="space-y-4">
+        <ul className="grid grid-cols-3 gap-4">
           {repos.map((repo) => (
             <li
               key={repo.id}
-              className="p-4 border border-gray-200 rounded-lg shadow-sm"
+              className="flex flex-col font-mono justify-between bg-white/10 p-4 rounded-lg shadow-lg"
             >
-              <h2 className="text-lg font-semibold text-gray-800 mb-1">
-                {repo.name}
-              </h2>
-              <p className="text-sm text-gray-600 mb-2">
-                {repo.description || "No description provided."}
-              </p>
-              <p className="text-sm">
-                <strong>Language:</strong> {repo.language || "N/A"}
+              <div>
+                <a
+                  href={repo.html_url}
+                  className="text-lg font-semibold text-white underline"
+                >
+                  {repo.name}
+                </a>
+                <p className="text-sm text-gray-300 mb-2 ">
+                  {repo.description || "No description provided."}
+                </p>
+              </div>
+              <p className="text-sm text-white w-full flex">
+                <strong className="w-full text-end">
+                  {repo.language || "N/A"}
+                </strong>
               </p>
             </li>
           ))}

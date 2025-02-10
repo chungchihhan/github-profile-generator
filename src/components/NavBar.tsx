@@ -22,6 +22,7 @@ export default function NavBar() {
           <div className="hidden md:flex space-x-6 h-10">
             <NavLink href="/">Home</NavLink>
             <NavLink href="/about">About</NavLink>
+            <NavLink href="/repos">Repos</NavLink>
             <NavLink href="/generate">Generate</NavLink>
             <NavLink href="/contact">Contact</NavLink>
             <Link href="/login" className="flex items-center">
@@ -71,6 +72,9 @@ export default function NavBar() {
             </NavLink>
             <NavLink href="/about" onClick={() => setIsOpen(false)}>
               About
+            </NavLink>
+            <NavLink href="/repos" onClick={() => setIsOpen(false)}>
+              Repos
             </NavLink>
             <NavLink href="/generate" onClick={() => setIsOpen(false)}>
               Generate
