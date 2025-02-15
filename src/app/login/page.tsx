@@ -16,8 +16,8 @@ export default function Page() {
                 <Image
                   src={session.user?.image || "/default-avatar.png"}
                   alt="User Avatar"
-                  width={100}
-                  height={100}
+                  width={300}
+                  height={300}
                   className="w-56 h-56 rounded-full"
                 />
                 <p className="text-lg text-white">
