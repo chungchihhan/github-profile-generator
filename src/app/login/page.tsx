@@ -1,6 +1,7 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Github } from "lucide-react";
+import Image from "next/image";
 
 export default function Page() {
   const { data: session } = useSession();
@@ -12,9 +13,11 @@ export default function Page() {
           {session ? (
             <>
               <div className="flex flex-col gap-4 font-mono items-center">
-                <img
+                <Image
                   src={session.user?.image || "/default-avatar.png"}
                   alt="User Avatar"
+                  width={300}
+                  height={300}
                   className="w-56 h-56 rounded-full"
                 />
                 <p className="text-lg text-white">
@@ -43,7 +46,7 @@ export default function Page() {
                   Sign in with GitHub
                 </button>
                 <p className="flex text-white gap-2 font-mono text-xs">
-                  Don't have a github account?
+                  Don&apos;t have a github account?
                   <a
                     href="https://github.com/signup"
                     target="_blank"
