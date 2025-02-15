@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SubmitForm from "@/components/SubmitForm";
 import { submitForm } from "@/lib/actions";
+import Image from "next/image";
 
 export default function ImageGenerator() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -36,7 +37,12 @@ export default function ImageGenerator() {
       </div>
       {imageUrl && (
         <div className="">
-          <img src={imageUrl} alt="Generated image" className="" />
+          <Image
+            src={imageUrl}
+            alt="Generated image"
+            className=""
+            width={100}
+          />
         </div>
       )}
     </div>

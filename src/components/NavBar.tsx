@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, User, X } from "lucide-react";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,13 +29,16 @@ export default function NavBar() {
             <Link href="/login" className="flex items-center">
               <div className="flex overflow-hidden rounded-full border-2 border-white">
                 {session ? (
-                  <img
+                  <Image
                     src={session.user?.image || "/default-avatar.png"}
                     alt="User Avatar"
-                    className="w-7"
+                    width={28}
+                    height={28}
+                    className="object-cover"
+                    priority
                   />
                 ) : (
-                  <User className="text-white" />
+                  <User className="text-white" size={26} />
                 )}
               </div>
             </Link>
@@ -51,13 +55,16 @@ export default function NavBar() {
             <Link href="/login" className="flex items-center">
               <div className="flex overflow-hidden rounded-full border-2 border-white">
                 {session ? (
-                  <img
+                  <Image
                     src={session.user?.image || "/default-avatar.png"}
                     alt="User Avatar"
-                    className="w-7"
+                    width={28}
+                    height={28}
+                    className="object-cover"
+                    priority
                   />
                 ) : (
-                  <User className="text-white" />
+                  <User className="text-white" size={26} />
                 )}
               </div>
             </Link>

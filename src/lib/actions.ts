@@ -101,11 +101,11 @@ export async function submitForm(data: string) {
       repos: repoDetails,
       imageUrl,
     };
-  } catch (error: any) {
+  } catch (error) {
     return {
       status: "error",
       message: "Error: Failed to process request.",
-      error: error.message,
+      error: error,
     };
   }
 }
