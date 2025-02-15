@@ -46,7 +46,7 @@ export default function Page() {
                   Sign in with GitHub
                 </button>
                 <p className="flex text-white gap-2 font-mono text-xs">
-                  Don't have a github account?
+                  Don&apos;t have a github account?
                   <a
                     href="https://github.com/signup"
                     target="_blank"
