@@ -17,5 +17,117 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-jetbrains), monospace;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-orbitron), sans-serif;
+}
+
+/* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 255, 136, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00FF88, #00D4FF);
+  border-radius: 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00FF88, #00FFD4);
+}
+
+/* Animation for scan line effect */
+@keyframes scan {
+  0% {
+    transform: translateY(-100vh);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.animate-scan {
+  animation: scan 8s linear infinite;
+}
+
+/* Glitch animation */
+@keyframes glitch {
+  0%, 100% {
+    clip-path: inset(0 0 100% 0);
+  }
+  25% {
+    clip-path: inset(0 0 50% 0);
+  }
+  50% {
+    clip-path: inset(50% 0 0 0);
+  }
+  75% {
+    clip-path: inset(0 0 80% 0);
+  }
+}
+
+.animate-glitch {
+  animation: glitch 0.5s linear;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Tailwind Prose Overrides for Markdown */
+.prose-invert {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.prose-invert strong {
+  color: white;
+}
+
+.prose-invert h1,
+.prose-invert h2,
+.prose-invert h3,
+.prose-invert h4 {
+  color: white;
+}
+
+.prose-invert code {
+  color: rgb(147, 197, 253);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.prose-invert pre {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prose-invert ul > li::before {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.prose-invert ol > li::before {
+  color: rgba(255, 255, 255, 0.4);
 }

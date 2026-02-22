@@ -48,9 +48,27 @@ export async function submitForm(data: string) {
     // Filter out forked repos to focus on original work
     const originalRepos = repoData.filter((repo: any) => !repo.fork);
 
+    // Sort repos by importance: combination of stars, recent updates, and size
+    const sortedRepos = originalRepos.sort((a: any, b: any) => {
+      // Calculate a score for each repo
+      const scoreA =
+        a.stargazers_count * 3 + // Stars are important
+        (a.size || 0) * 0.001 + // Repo size matters a bit
+        (new Date(a.updated_at).getTime() > Date.now() - 30 * 24 * 60 * 60 * 1000 ? 10 : 0) + // Recently updated
+        (a.watchers_count || 0) * 2; // Watchers indicate interest
+
+      const scoreB =
+        b.stargazers_count * 3 +
+        (b.size || 0) * 0.001 +
+        (new Date(b.updated_at).getTime() > Date.now() - 30 * 24 * 60 * 60 * 1000 ? 10 : 0) +
+        (b.watchers_count || 0) * 2;
+
+      return scoreB - scoreA; // Sort descending
+    });
+
     // Prepare repository information for analysis
-    const repoSummary = originalRepos
-      .slice(0, 30) // Analyze up to 30 repos for comprehensive profile
+    const repoSummary = sortedRepos
+      .slice(0, 30) // Analyze up to 30 most important repos
       .map(
         (repo: {
           name: string;
@@ -174,10 +192,16 @@ export async function submitForm(data: string) {
       // Continue without image - prompt is still valuable
     }
 
+    // Get repo names for display
+    const repoNames = sortedRepos
+      .slice(0, 30)
+      .map((repo: any) => repo.name);
+
     return {
       status: "success",
       message: "Profile analyzed successfully",
       username: username,
+      repos: repoNames,
       analysis: analysisText,
       imagePrompt: imagePrompt,
       repoCount: originalRepos.length,
